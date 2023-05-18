@@ -6,13 +6,34 @@
 #include<math.h>
 #include <stdlib.h>
 
+
 class RocketShip {
 public:
-    void laserBeam() {
+    
+    
+    void laserBeam(int x, int y, int laserbeamColor) {
+    
+        if (laserbeamColor == 0) {
+            glColor3f(1, 0, 0);
+        }
+        else if (laserbeamColor == 1) {
+            glColor3f(0, 1, 0);
+        }
+        else {
+            glColor3f(0, 0, 1);
+        }
+
+        glBegin(GL_POLYGON);
+        glVertex2f(x, y + 8);
+        glVertex2f(x - 5, y + 10);
+        glVertex2f(x-5, y+100);
+        glVertex2f(x + 5, y + 100);
+        glVertex2f(x+5, y+10);
         
+        glEnd();
     }
 
-    void drawRocket(int x, int y) {
+    void drawRocket(int x, int y , int laserbeamColor) {
         //Rocket Body (white)
         glColor3f(1, 1, 1);
         glBegin(GL_POLYGON);
@@ -55,6 +76,7 @@ public:
         glVertex2f(x - 2, y - 5);
         glEnd();
 
+        laserBeam(x,y,laserbeamColor);
 
     }
 };

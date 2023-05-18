@@ -7,6 +7,7 @@
 #include <stdlib.h>
 #include "tools/tools.cpp"
 #include "components/RocketShip.cpp"
+#include "components/asteroids.cpp"
 
 int phyWidth = 700;
 int phyHeight = 700;
@@ -15,10 +16,19 @@ int logHeight = 100;
 int centerX = logWidth/2;
 int centerY = logHeight/2;
 int mouseX = centerX, mouseY = centerY;
-int startButton[4] = {35, 45, 65, 55}; // [x1, y1, x2, y2]
+int laserBeamColor = 0;
 
 RocketShip rocketShip;
 tools tool;
+asteroids asteroid;
+
+void changeBeamColor(unsigned char key, int x, int y) {
+    if (key == 32) {
+        if(laserBeamColor<2)
+            laserBeamColor++;
+        else laserBeamColor=0;
+    }
+}
 
 void passiveMouse(int x, int y) {
     mouseX = x;
@@ -28,11 +38,9 @@ void passiveMouse(int x, int y) {
     glutPostRedisplay();
 }
 
-
-
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-    rocketShip.drawRocket(mouseX, mouseY);
+    rocketShip.drawRocket(mouseX, mouseY, laserBeamColor);
     glutSwapBuffers();
     glFlush();
 }
@@ -46,7 +54,7 @@ int main(int argc, char *argv[])
     glutCreateWindow("Road picture");
     tool.init2D(0,0,0);
     glutDisplayFunc(display);
-    //glutMouseFunc(mouseClick);
     glutPassiveMotionFunc(passiveMouse);
+    glutKeyboardFunc(changeBeamColor);
     glutMainLoop();
 }
