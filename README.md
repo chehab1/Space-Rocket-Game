@@ -26,14 +26,14 @@ To run the game, you need to have the following installed:
 2. Compile the game using any C++ compiler
 
 Or simply run 
-```bash
-Program.exe
-```
+   ```bash
+   Program.exe
+   ```
 
 ## Controls
 
-1- Navigate the ship using mouse.
-2- Alter laserbeam using spacebar.
+- Navigate the ship using mouse.
+- Alter laserbeam using spacebar.
 
 ## License
 
