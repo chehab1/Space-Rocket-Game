@@ -25,7 +25,7 @@ To run the game, you need to have the following installed:
 
 2. Compile the game using any C++ compiler
 
-Or simply run 
+3. Or simply run 
    ```bash
    Program.exe
    ```
