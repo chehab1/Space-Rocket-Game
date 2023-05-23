@@ -45,7 +45,7 @@ void changeBeamColor(unsigned char key, int x, int y)
 
 void Timer(int value)
 {
-    glutTimerFunc(35, Timer, value);
+    glutTimerFunc(50, Timer, value);
     glutPostRedisplay();
 }
 
