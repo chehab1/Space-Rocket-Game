@@ -5,6 +5,8 @@
 #endif
 #include <math.h>
 #include <stdlib.h>
+#include <iostream>
+#include <string>
 #include "tools/tools.cpp"
 #include "components/RocketShip.cpp"
 #include "components/asteroids.cpp"
@@ -22,7 +24,8 @@ int mouseX = centerX;
 int mouseY = centerY;
 
 int laserBeamColor = 0;
-int asterCount = 25;
+int asterCount = 25; // total asteroids 25
+int gameplayTime = 20;
 int score = 0;
 
 RocketShip rocketShip;
@@ -69,8 +72,11 @@ void fallingAsteroid() {
     //  score++;
     //  asteroid1.create();
     //  asterDownY = 0;
-    
+
 }
+//convert integer to string
+
+
 
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
@@ -80,6 +86,7 @@ void display() {
     if (asterCount) {
         fallingAsteroid();
     }
+    tool.printSome("Time:", 85, 95, 1, 1, 1);
     glutSwapBuffers();
     glFlush();
 }

@@ -11,23 +11,25 @@ tools myTool;
 class asteroids {
 public:
 
-   int x = 1 + rand() % 100;
-   int y = 100;
-   float speedDown = 0.3;
-   int color = 1 + rand() % 3;
-   int segments = 100;
-   int radius = 3;
+   int x = 50;  // start first asteroid at 50 in x axis (Middle of screen)
+   int y = 100; // start all asteroids at 100 in y axis (Top of screen)
+   float rate = 0.3; // speed in which asteroids fall
+   int color = 1 + rand() % 3; // generate random color for asteroids (r,g,b)
 
-   void create()
-   {
-      x = 1 + rand() % 100;
+   void create() {
+      x = 10 + rand() % 90;
       y = 100;
       color = 1 + rand() % 3;
    }
 
-   void render()
-   {
-      y -= speedDown;;
-      myTool.drawCircle(x, y, radius, segments, color);
+   void render() {
+      y -= rate;
+      myTool.drawCircle(x, y, 3, 100, color);
+   }
+
+   void createAsteroid() {
+      create();
+      render();
+      
    }
 };

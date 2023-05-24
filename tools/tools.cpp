@@ -8,8 +8,7 @@
 
 class tools {
 public:
-    void drawCircle(float cx, float cy, float radius, int num_segments, int color)
-    {
+    void drawCircle(float cx, float cy, float radius, int num_segments, int color) {
         if (color == 1)
             glColor3f(1, 0, 0);
 
@@ -30,15 +29,13 @@ public:
         glEnd();
     }
 
-    void init2D(float r, float g, float b)
-    {
+    void init2D(float r, float g, float b) {
         glClearColor(r, g, b, 0);
         glMatrixMode(GL_PROJECTION);
         gluOrtho2D(0.0, 100.0, 0.0, 100.0);
     }
 
-    void printSome(char* str, int x, int y, float r, float g, float b)
-    {
+    void printSome(char* str, int x, int y, float r, float g, float b) {
         glColor3f(r, g, b);
         glRasterPos2d(x, y);
         for (int i = 0; i < strlen(str); i++)

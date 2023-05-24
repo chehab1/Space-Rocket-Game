@@ -11,8 +11,7 @@ class RocketShip {
 public:
 
 
-    void laserBeam(int x, int y, int laserbeamColor)
-    {
+    void laserBeam(int x, int y, int laserbeamColor) {
 
         if (laserbeamColor == 0) {
             glColor3f(1, 0, 0);
@@ -34,8 +33,7 @@ public:
         glEnd();
     }
 
-    void drawRocket(int x, int y, int laserbeamColor)
-    {
+    void drawRocket(int x, int y, int laserbeamColor) {
         //Rocket Body (white)
         glColor3f(1, 1, 1);
         glBegin(GL_POLYGON);
