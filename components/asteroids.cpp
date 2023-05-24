@@ -15,6 +15,7 @@ public:
    int y = 100; // start all asteroids at 100 in y axis (Top of screen)
    float rate = 0.1; // speed in which asteroids fall
    int color = 1 + rand() % 3; // generate random color for asteroids (r,g,b)
+   int radius = 3; // radius of asteroids
 
    void create() {
       x = 10 + rand() % 90;
@@ -23,7 +24,7 @@ public:
    }
 
    void render() {
-      myTool.drawCircle(x, y, 3, 100, color);
+      myTool.drawCircle(x, y, radius, 100, color);
       y -= rate;
    }
 

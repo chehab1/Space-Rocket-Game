@@ -3,6 +3,7 @@
 #else
 #include <GL/glut.h>
 #endif
+#include <sstream>
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
@@ -30,6 +31,7 @@ int asterCount = 25; // total asteroids 25
 int gameplayTime = 20;
 int score = 0;
 int gameOver = 0;
+int time = 20;
 
 RocketShip rocketShip;
 tools tool;
@@ -41,7 +43,9 @@ void restart(int key, int x, int y) {
         gameplayTime = 20;
         gameOver = 0;
         asterCount = 25;
+        time = 20;
     }
+    
 }
 
 void changeBeamColor(unsigned char key, int x, int y) {
@@ -76,7 +80,6 @@ void destroy() {
     if (asteroidLeft >= beamLeft && asteroidRight <= beamRight && laserBeamColor == asteroid1.color) {
         asteroid1.kill();
         score++;
-        cout << "Score: " << score << endl;
     }
 }
 
@@ -86,6 +89,7 @@ void fallingAsteroid() {
     if (asteroid1.y < 10) {
         asterCount--;
         asteroid1.create();
+        time--;
     }
     destroy();
 }
@@ -93,7 +97,9 @@ void fallingAsteroid() {
 void gameOverScreen() {
     glClear(GL_COLOR_BUFFER_BIT);
     tool.printSome("Game Over!", 40, 70, 1, 1, 1);
-    tool.printSome("Your Score is: ", 40, 60, 1, 1, 1);
+    stringstream ss;
+    ss << "Your Score: " << score;
+    tool.printSome(ss.str().c_str(), 40, 60, 1, 1, 1);
     tool.printSome("Press F1 to restart", 40, 50, 1, 1, 1);
 
 }
@@ -101,12 +107,17 @@ void gameOverScreen() {
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     rocketShip.drawRocket(mouseX, mouseY, laserBeamColor); // draw rocket
-    tool.printSome("Time:$", 84, 96, 1, 1, 1);
-    tool.printSome("Score:", 1, 96, 1, 1, 1);
-    if (asterCount) {
+    std::stringstream ss1;
+    ss1 << "Time: " << time;
+    tool.printSome(ss1.str().c_str(), 84, 96, 1, 1, 1);
+    std::stringstream ss;
+    ss << "Score: " << score;
+    
+    tool.printSome(ss.str().c_str(), 1, 96, 1, 1, 1);
+    if (asterCount && time) {
         fallingAsteroid();
     }
-    else {
+    else{
         gameOver = 1;
         gameOverScreen();
     }

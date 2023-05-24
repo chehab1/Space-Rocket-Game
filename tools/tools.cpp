@@ -3,8 +3,12 @@
 #else
 #include <GL/glut.h>
 #endif
+#include <iostream>
+#include <string>
 #include <math.h>
 #include <stdlib.h>
+
+using namespace std;
 
 class tools {
 public:
@@ -35,10 +39,10 @@ public:
         gluOrtho2D(0.0, 100.0, 0.0, 100.0);
     }
 
-    void printSome(char* str, int x, int y, float r, float g, float b) {
+    void printSome(string str, int x, int y, float r, float g, float b) {
         glColor3f(r, g, b);
         glRasterPos2d(x, y);
-        for (int i = 0; i < strlen(str); i++)
+        for (int i = 0; i < str.size(); i++)
             glutBitmapCharacter(GLUT_BITMAP_TIMES_ROMAN_24, str[i]);
         glFlush();
     }
