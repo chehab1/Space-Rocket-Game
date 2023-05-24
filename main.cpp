@@ -6,7 +6,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <iostream>
-#include <string>
+#include <string.h>
 #include "tools/tools.cpp"
 #include "components/RocketShip.cpp"
 #include "components/asteroids.cpp"
@@ -29,12 +29,22 @@ int laserBeamColor = 1;
 int asterCount = 25; // total asteroids 25
 int gameplayTime = 20;
 int score = 0;
+int gameOver = 0;
 
 RocketShip rocketShip;
 tools tool;
 asteroids asteroid1;
 
-void changeBeamColor(unsigned char key, int x, int y){
+void restart(int key, int x, int y) {
+    if(key == GLUT_KEY_F1 && gameOver == 1) {
+        score = 0;
+        gameplayTime = 20;
+        gameOver = 0;
+        asterCount = 25;
+    }
+}
+
+void changeBeamColor(unsigned char key, int x, int y) {
     if (key == 32)
     {
         if (laserBeamColor < 3)
@@ -57,6 +67,7 @@ void Timer(int value) {
     glutTimerFunc(10, Timer, value);
     glutPostRedisplay();
 }
+
 void destroy() {
     int beamLeft = mouseX - 5;
     int beamRight = mouseX + 5;
@@ -64,7 +75,8 @@ void destroy() {
     int asteroidRight = asteroid1.x + 3;
     if (asteroidLeft >= beamLeft && asteroidRight <= beamRight && laserBeamColor == asteroid1.color) {
         asteroid1.kill();
-        cout << "destroyed";
+        score++;
+        cout << "Score: " << score << endl;
     }
 }
 
@@ -76,30 +88,29 @@ void fallingAsteroid() {
         asteroid1.create();
     }
     destroy();
-    // destroy atersoid
-    //Beam_left_borders = mouseX - (beamwidth / 2);
-    //Asteroid_Right_Borders = asteroid.x + asteroid.radius
-    //Asteroid_Left_Borders = asteroid.x - asteroid.radius
-    //if(Beam_left_borders < Asteroid_Right_Borders && Beam_left_borders >= Asteroid_Right_Borders && Beamcolor = asteroid.color)
-    //  asterCount--; 
-    //  score++;
-    //  asteroid1.create();
-    //  asterDownY = 0;
+}
+
+void gameOverScreen() {
+    glClear(GL_COLOR_BUFFER_BIT);
+    tool.printSome("Game Over!", 40, 70, 1, 1, 1);
+    tool.printSome("Your Score is: ", 40, 60, 1, 1, 1);
+    tool.printSome("Press F1 to restart", 40, 50, 1, 1, 1);
 
 }
 
-
-
 void display() {
     glClear(GL_COLOR_BUFFER_BIT);
-
-    rocketShip.drawRocket(mouseX, mouseY, laserBeamColor);
-    
+    rocketShip.drawRocket(mouseX, mouseY, laserBeamColor); // draw rocket
+    tool.printSome("Time:$", 84, 96, 1, 1, 1);
+    tool.printSome("Score:", 1, 96, 1, 1, 1);
     if (asterCount) {
         fallingAsteroid();
     }
-    tool.printSome("Time:", 84, 96, 1, 1, 1);
-    tool.printSome("Score:", 1, 96, 1, 1, 1);
+    else {
+        gameOver = 1;
+        gameOverScreen();
+    }
+    
     glutSwapBuffers();
     glFlush();
 }
@@ -114,6 +125,7 @@ int main(int argc, char* argv[]) {
     glutDisplayFunc(display);
     glutPassiveMotionFunc(passiveMouse);
     glutKeyboardFunc(changeBeamColor);
+    glutSpecialFunc(restart);
     Timer(0);
     glutMainLoop();
 }
