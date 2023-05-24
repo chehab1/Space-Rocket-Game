@@ -21,7 +21,6 @@ int centerY = logHeight / 2;
 int mouseX = centerX;
 int mouseY = centerY;
 
-int asterDownY = 0;
 int laserBeamColor = 0;
 int asterCount = 25;
 int score = 0;
@@ -30,8 +29,7 @@ RocketShip rocketShip;
 tools tool;
 asteroids asteroid1;
 
-void changeBeamColor(unsigned char key, int x, int y)
-{
+void changeBeamColor(unsigned char key, int x, int y){
     if (key == 32)
     {
         if (laserBeamColor < 2)
@@ -39,29 +37,29 @@ void changeBeamColor(unsigned char key, int x, int y)
         else
             laserBeamColor = 0;
     }
-
     glutPostRedisplay();
 }
 
-void Timer(int value)
-{
-    glutTimerFunc(50, Timer, value);
-    glutPostRedisplay();
-}
-
-void passiveMouse(int x, int y)
-{
+void passiveMouse(int x, int y) {
     mouseX = x;
     mouseX = 0.5 + 1.0 * mouseX * logWidth / phyWidth;
     mouseY = phyHeight - y;
     mouseY = 0.5 + 1.0 * mouseY * logHeight / phyHeight;
+    glutPostRedisplay();
 }
 
-void fallingAsteroid()
-{
-    asteroid1.render(asterDownY++);
+void Timer(int value) {
+    glutTimerFunc(1, Timer, value);
+    glutPostRedisplay();
+}
 
-
+void fallingAsteroid() {
+    asteroid1.render();
+    if (asteroid1.y < 15) {
+        asterCount--;
+        asteroid1.create();
+    }
+    
     // destroy atersoid
     //Beam_left_borders = mouseX - (beamwidth / 2);
     //Asteroid_Right_Borders = asteroid.x + asteroid.radius
@@ -71,29 +69,22 @@ void fallingAsteroid()
     //  score++;
     //  asteroid1.create();
     //  asterDownY = 0;
-
-    if (asteroid1.y < 15)
-    {
-        asterCount--;
-        asteroid1.create();
-        asterDownY = 0;
-    }
+    
 }
 
-void display()
-{
+void display() {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    rocketShip.render(mouseX, mouseY, laserBeamColor);
-    if (asterCount)
+    rocketShip.drawRocket(mouseX, mouseY, laserBeamColor);
+    
+    if (asterCount) {
         fallingAsteroid();
-
+    }
     glutSwapBuffers();
     glFlush();
 }
 
-int main(int argc, char* argv[])
-{
+int main(int argc, char* argv[]) {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
     glutInitWindowSize(700, 700);

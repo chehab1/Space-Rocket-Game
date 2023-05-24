@@ -13,6 +13,7 @@ public:
 
    int x = 1 + rand() % 100;
    int y = 100;
+   float speedDown = 0.3;
    int color = 1 + rand() % 3;
    int segments = 100;
    int radius = 3;
@@ -24,9 +25,9 @@ public:
       color = 1 + rand() % 3;
    }
 
-   void render(int down)
+   void render()
    {
-      y -= down;  
+      y -= speedDown;;
       myTool.drawCircle(x, y, radius, segments, color);
    }
 };

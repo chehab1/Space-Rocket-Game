@@ -34,7 +34,7 @@ public:
         glEnd();
     }
 
-    void render(int x, int y, int laserbeamColor)
+    void drawRocket(int x, int y, int laserbeamColor)
     {
         //Rocket Body (white)
         glColor3f(1, 1, 1);
