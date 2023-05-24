@@ -25,7 +25,7 @@ int centerY = logHeight / 2;
 int mouseX = centerX;
 int mouseY = centerY;
 
-int laserBeamColor = 0;
+int laserBeamColor = 1;
 int asterCount = 25; // total asteroids 25
 int gameplayTime = 20;
 int score = 0;
@@ -37,10 +37,10 @@ asteroids asteroid1;
 void changeBeamColor(unsigned char key, int x, int y){
     if (key == 32)
     {
-        if (laserBeamColor < 2)
+        if (laserBeamColor < 3)
             laserBeamColor++;
         else
-            laserBeamColor = 0;
+            laserBeamColor = 1;
     }
     glutPostRedisplay();
 }
@@ -62,7 +62,7 @@ void destroy() {
     int beamRight = mouseX + 5;
     int asteroidLeft = asteroid1.x - 3;
     int asteroidRight = asteroid1.x + 3;
-    if (asteroidLeft >= beamLeft && asteroidRight <= beamRight) {
+    if (asteroidLeft >= beamLeft && asteroidRight <= beamRight && laserBeamColor == asteroid1.color) {
         asteroid1.kill();
         cout << "destroyed";
     }
