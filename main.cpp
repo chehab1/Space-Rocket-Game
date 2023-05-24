@@ -11,6 +11,8 @@
 #include "components/RocketShip.cpp"
 #include "components/asteroids.cpp"
 
+using namespace std;
+
 int phyWidth = 700;
 int phyHeight = 700;
 
@@ -52,17 +54,28 @@ void passiveMouse(int x, int y) {
 }
 
 void Timer(int value) {
-    glutTimerFunc(1, Timer, value);
+    glutTimerFunc(10, Timer, value);
     glutPostRedisplay();
+}
+void destroy() {
+    int beamLeft = mouseX - 5;
+    int beamRight = mouseX + 5;
+    int asteroidLeft = asteroid1.x - 3;
+    int asteroidRight = asteroid1.x + 3;
+    if (asteroidLeft >= beamLeft && asteroidRight <= beamRight) {
+        asteroid1.kill();
+        cout << "destroyed";
+    }
 }
 
 void fallingAsteroid() {
+    
     asteroid1.render();
-    if (asteroid1.y < 15) {
+    if (asteroid1.y < 10) {
         asterCount--;
         asteroid1.create();
     }
-    
+    destroy();
     // destroy atersoid
     //Beam_left_borders = mouseX - (beamwidth / 2);
     //Asteroid_Right_Borders = asteroid.x + asteroid.radius
@@ -74,7 +87,6 @@ void fallingAsteroid() {
     //  asterDownY = 0;
 
 }
-//convert integer to string
 
 
 
