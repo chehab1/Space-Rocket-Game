@@ -86,7 +86,8 @@ void display() {
     if (asterCount) {
         fallingAsteroid();
     }
-    tool.printSome("Time:", 85, 95, 1, 1, 1);
+    tool.printSome("Time:", 84, 96, 1, 1, 1);
+    tool.printSome("Score:", 1, 96, 1, 1, 1);
     glutSwapBuffers();
     glFlush();
 }

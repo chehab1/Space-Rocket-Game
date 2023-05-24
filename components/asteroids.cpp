@@ -26,10 +26,4 @@ public:
       y -= rate;
       myTool.drawCircle(x, y, 3, 100, color);
    }
-
-   void createAsteroid() {
-      create();
-      render();
-      
-   }
 };
