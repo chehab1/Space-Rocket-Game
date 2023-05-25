@@ -31,7 +31,6 @@ int asterCount = 25; // total asteroids 25
 int gameplayTime = 20;
 int score = 0;
 int gameOver = 0;
-int time = 20;
 
 RocketShip rocketShip;
 tools tool;
@@ -43,7 +42,6 @@ void restart(int key, int x, int y) {
         gameplayTime = 20;
         gameOver = 0;
         asterCount = 25;
-        time = 20;
     }
     
 }
@@ -83,13 +81,17 @@ void destroy() {
     }
 }
 
+void decreaseTime(int value) {
+    glutTimerFunc(1000, decreaseTime, value);
+    gameplayTime--;
+}
+
 void fallingAsteroid() {
     
     asteroid1.render();
     if (asteroid1.y < 10) {
         asterCount--;
         asteroid1.create();
-        time--;
     }
     destroy();
 }
@@ -108,13 +110,13 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT);
     rocketShip.drawRocket(mouseX, mouseY, laserBeamColor); // draw rocket
     std::stringstream ss1;
-    ss1 << "Time: " << time;
+    ss1 << "Time: " << gameplayTime;
     tool.printSome(ss1.str().c_str(), 84, 96, 1, 1, 1);
     std::stringstream ss;
     ss << "Score: " << score;
     
     tool.printSome(ss.str().c_str(), 1, 96, 1, 1, 1);
-    if (asterCount && time) {
+    if (asterCount>0 && gameplayTime>0) {
         fallingAsteroid();
     }
     else{
@@ -138,5 +140,6 @@ int main(int argc, char* argv[]) {
     glutKeyboardFunc(changeBeamColor);
     glutSpecialFunc(restart);
     Timer(0);
+    decreaseTime(0);
     glutMainLoop();
 }
