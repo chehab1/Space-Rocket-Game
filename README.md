@@ -1,6 +1,6 @@
 # Space Rocket Game
 
-![Game Screenshot](screenshot.png)
+![Game Screenshot](./SS/gameplay_ss.png)
 
 This repository contains a space rocket game developed using C++ and OpenGL. The game allows players to control a space rocket and destroy astroids.
 
