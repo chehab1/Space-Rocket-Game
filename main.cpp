@@ -66,7 +66,7 @@ void passiveMouse(int x, int y) {
 }
 
 void Timer(int value) {
-    glutTimerFunc(10, Timer, value);
+    glutTimerFunc(1, Timer, value);
     glutPostRedisplay();
 }
 

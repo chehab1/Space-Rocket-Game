@@ -12,8 +12,8 @@ class asteroids {
 public:
 
    int x = 50;  // start first asteroid at 50 in x axis (Middle of screen)
-   int y = 100; // start all asteroids at 100 in y axis (Top of screen)
-   float rate = 0.1; // speed in which asteroids fall
+   float y = 100; // start all asteroids at 100 in y axis (Top of screen)
+   float rate = 0.2; // speed in which asteroids fall
    int color = 1 + rand() % 3; // generate random color for asteroids (r,g,b)
    int radius = 3; // radius of asteroids
 
