@@ -1,6 +1,9 @@
 # Space Rocket Game
 
-![Gameplay](./SS/space rocket gameplay.mp4)
+## Gameplay
+
+https://github.com/chehab1/Space-Rocket-Game/assets/102818359/36bb793b-ca5c-43b9-bb5c-5d6ce1cea254
+
 
 This repository contains a space rocket game developed using C++ and OpenGL. The game allows players to control a space rocket and destroy astroids.
 
