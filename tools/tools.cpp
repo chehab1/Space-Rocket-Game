@@ -19,8 +19,10 @@ public:
         else if (color == 2)
             glColor3f(0, 1, 0);
 
-        else
+        else if (color == 3)
             glColor3f(0, 0, 1);
+        else
+            glColor3f(1, 1, 1);
 
         glBegin(GL_POLYGON);
         for (int i = 0; i < num_segments; i++)

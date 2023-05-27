@@ -11,6 +11,7 @@
 #include "tools/tools.cpp"
 #include "components/RocketShip.cpp"
 #include "components/asteroids.cpp"
+#include "components/stars.cpp"
 
 using namespace std;
 
@@ -35,6 +36,7 @@ int gameOver = 0;
 RocketShip rocketShip;
 tools tool;
 asteroids asteroid1;
+stars star;
 
 void restart(int key, int x, int y) {
     if(key == GLUT_KEY_F1 && gameOver == 1) {
@@ -116,7 +118,11 @@ void display() {
     ss << "Score: " << score;
     
     tool.printSome(ss.str().c_str(), 1, 96, 1, 1, 1);
-    if (asterCount>0 && gameplayTime>0) {
+
+    star.createStars();
+
+
+    if (asterCount > 0 && gameplayTime > 0) {
         fallingAsteroid();
     }
     else{
